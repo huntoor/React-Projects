@@ -1,0 +1,23 @@
+import { useState } from 'react';
+
+function InputComponent() {
+  const [inputText, setText] = useState('hello');
+
+  const handleChange = (e) => {
+    setText(e.target.value);
+  }
+
+  const reset = () => setText('hello');
+
+  return (
+    <div style={{margin: "20px"}}>
+      <input value={inputText} onChange={handleChange} />
+      <p>You typed: {inputText}</p>
+      <button onClick={reset}>
+        Reset
+      </button>
+    </div>
+  );
+}
+
+export default InputComponent;

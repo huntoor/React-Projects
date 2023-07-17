@@ -1,0 +1,246 @@
+React Basics:
+- Module 1: Anatomy of React
+	- purpose of this modile is to understand the what and why and get set up for the modles that follow
+	- leanr how to build components and how to structure and cusomize react project and how to compose layouts by imprint componets into other components
+	- lean about passing data from one component to another, learn about JSX syntax in React and how to use it to structure and style your componetns
+	
+- Module 2: Data and State
+	- Working with events and errors in React, Learn how events work and how you can handle them n React
+	
+- Module 3: Navigation Updating and Assets in React
+	- learnabout routing and navigation in React. Learn how to render partial views and how to update routes in React apps
+	- Understande how assets are used, bundled and embedded
+	
+- Module 4: Portfolio Mini-Project (Calculator App)
+	- build Calculator app in React
+
+Week 1:
+React Compontetns and where they live
+Intro to functional components:
+	react is synatxed to JSX
+	jsx: looks like html
+	all component in React must be capitalized ex: Heading.js
+	Transpiling: interpreting a programming language and trasnlateing it to a specific target language 
+	React compinent is like js function
+
+Creating React Components
+	for a component to render something on the page, it needs to return it as a one or more JSX elements
+	
+Transpiling JSX
+	Broswer cannot understand jsx syntax so we use transpiler
+	trasnpiler takes pirce of code and transforms it into some other code
+	https://babeljs.io/ transcomiler that convert EXMAScript code in to backwoard compatible js code
+	Transfpiling JSX to standart js: 
+	
+Principles of Components: Props
+	what are props: porps looks like js objects ex for js objects: const fruits = {type:"apple", quantity:500}; console.log(fruits.type)
+	React props:
+		- pass data between componets
+		- Arguments are passed like HTML attributes
+		- Uses the keyword props
+		- Ex: 
+		  index.js:
+			.render(<App title="Welcome" />)
+		  App.js:
+		  	App(props) {
+		  		return (
+		  			<h1>{props.title}</h1>
+		  		)
+		  	}
+			
+Events and Event Handlers
+	React Event example:
+		function Btn() {
+			const clickHandler = () => console.log("Btn clicked");
+			
+			return (
+				<button onClick={ clickHandler }>
+					Click me
+				</button>
+			);
+		}
+
+	React makes you avoid manipulating DOM directly
+	Event Handling examples
+	1) using inline anonymous ES5 function
+		<button onClick={function() {consol.log("first example");}}>
+			inline anonymous ES5 function event handler
+		</button>
+		
+	2) using inline anonymous ES6 functon
+		<button onClick={() => console.log("secound example)}>
+			inline anonymous ES6 function event handler (Arrow Function)
+		</button>
+		
+		
+	3) using separate function declaration
+		function thirdExample() {
+			console.log("third example");
+		}
+		return (
+			<button onClick={thirdExample}>
+				separate function declaration
+			</button>
+		}
+		
+	4) using spearate function expressions 
+		const fourthExmaple = () => console.log("frouth example");
+		return (
+			<button onClick={fourthExmaple}>
+				separate function expression
+			</button>
+		);HandleClick
+	
+	(to determine if a funciton is an expression or a declaration: if it does not start the line with the keyword *function* then it is an expression)
+	
+Parent-Child data flow
+	single source of truth allows you to 
+		- edit multiple itmes from a single point
+		- reduces the possibility of typing errors in code
+		- more efficient way of working when data frequently changes
+	
+	Data flow in React
+		React data flow is unidirectional which means that data flow from parent to child and not the opposite way
+		props are immutable (cannot be changed)
+		benifits of this unidirectional data flow are 
+			- comprehend the logic of React apps more quickly
+			- simplify the data flow
+		Example:
+			Parent Component:
+				Function Dog() {
+					return (
+						<puppy name="Max" bowlShape="square" />
+					);
+				}
+			Child Component:
+				Function Puppy(props) {
+					return (
+						<div>
+							{props.name} has <Bowl bowlShape="square" />
+						</div>
+					);
+				}
+			Grandchild component:
+				function Bowl(props) {
+					return (
+						<span>
+							{props.bowlShape}-- shaped bowl
+						</spane>
+					);
+				}
+				
+		Porps data belongs to the parent, while State data belongs to the component itself
+		
+What are hooks?
+		hooks solve problem of unnecessary code reuse across comonents
+		hooks are functions that let you hook into React state and lifecycle features from componets
+		hooks can be called only at the top level and only from React Function.
+		hooks rules:
+			- you can only call hooks at the top level of component
+			- you cannot call hooks inside loops or conditions
+			- you can only call hooks from React functions and not regular js functions
+		
+				
+What are State?
+	Data in a componet that determines behavior
+	when component is created it get an initial state
+	parent component is able to pass its state onto children components
+	state allow the component to stay in sync with each other
+	Statefil component:
+		function App() {
+			const [ greet, setGreet ] = React.useState('hii!');
+			
+			return (
+				<div>
+					<h1> A state value: {greet}</h1>
+				</div>
+			);
+		}
+		
+	const [ greet, setGreet ] = React.useState('hii!');
+		"greet" access state, and "setGreet" update the data in that state
+		
+	props object represents data that is extrenal to component, and state represents data that is internal to a component
+	lifting state up is state from the child component is moved to the parent component and the other child component receives it vid props
+	
+What is a context consumer?
+	it is the component that uses the context provider's state, and component that uses the sate provided by context API
+	
+What is Context API?
+	alternativ wat to working with staet in React, it us used to work with state from a gloabl store in React
+	
+	
+Bsice typed of Navigation
+	best practice navigation
+		horizontal nav bar, vertical nav menu, a menu hidding behide a button
+	How navigation is implemented in React?
+		- the entire app is loaded inside a single div, you're not actually visiting different pages
+		- different views are rendered when React makeds changes to the virtual DOM, with React updating the real DOM accordingly
+		
+		
+Single Page App (SPA)
+	Types of SPA
+		- Bunding: return and load all necessary HTML, CSS, Javascript immediatly
+		- Code Splittion, Lazy loading: return only the minimum HTML, CSS, Javascript needed to load app, additional resources are downloaded as required
+	How SPA Works
+		- client send initial requiest
+		- client recive HTML
+		- client send AJAX
+		- clinet recive JSON
+	
+Conditional Rednering
+	conditional rendering using ternary operator:
+		function CurrentMessage() {
+			const day = new Date().getDay();
+			
+			return (
+				{ day >= 1 && day <= 5
+				? <Workdays />
+				: <Weekends />
+				}
+			);
+		}
+	
+Using Assets in React
+	Assetes are: Images, Stylesheets, Fonts, Any file needed for the app to work as intended
+	
+	ways to display an imgae in React app
+		- use import keyword:
+			import image from './assets/image.png';
+			function App() {
+				return (
+					<img src={image} />
+				);
+			}
+		- use require keyword:
+			function App() {
+				return (
+					<img src={require('./assets/image.png')} />
+				);
+			}
+		- laod image from internet
+			const internetImage = 'url.com';
+			function App() {
+				return (
+					<img src={internetImage} />
+				);
+			}
+	ways to load videos and audio:
+		- using video element <video src="" />
+		- Embedded third party videos
+		- third-party npm package
+			how to install and use reactjs-media
+				https://www.npmjs.com/package/react-player
+				
+	
+Bundling Assets
+	What What is webpack?
+		it is a module bundler that takes various files such as SVG, image files, CSS, js, ts and it will bundle them together so that vrowser can understand that bundle
+	webpack builds a dependency graph and vundles modules into one or more files that a borwser can consume
+	webpack aslo do:
+		- traspiling: convert new js to old js
+		- optimize code to load a quickly as possible
+		- process SCSS code into regular CSS
+		- build source map of the bundle's building blocks
+		- help developers create modern webpages
+		
